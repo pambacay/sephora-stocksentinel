@@ -1,327 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sephora StockSentinel™ - Never Miss Your Holy Grail Product</title>
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StockSentinel™ | Never Miss Your Holy Grail Product</title>
 
-        /* Thumb-first mobile design: Large fonts, bottom CTAs, 48px+ touch targets [web:2][web:5] */
-        :root {
-            --primary-color: #d100a0; /* Sephora pink */
-            --text-dark: #1a1a1a;
-            --text-light: #666;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+<style>
+:root {
+  --primary: #d100a0;
+  --dark: #111;
+  --light: #666;
+  --bg: #f8f9fb;
+  --radius: 18px;
+}
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 0;
-            background: white;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-        .hero p {
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            margin-bottom: 40px;
-            color: var(--text-light);
-        }
-        .cta-button {
-            display: inline-block;
-            background: var(--primary-color);
-            color: white;
-            padding: 20px 40px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 10;
-        }
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(209, 0, 160, 0.3);
-        }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        /* Trust Bar */
-        .trust-bar {
-            background: #fff;
-            padding: 30px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-        .trust-bar p {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        .logos {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        .logo {
-            height: 40px;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-        .logo:hover {
-            opacity: 1;
-        }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.6;
+}
 
-        /* PAS Section */
-        .pas {
-            background: white;
-            padding: 60px 0;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
-        .pas > div {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .pas h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-        .pas p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            color: var(--text-light);
-        }
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
 
-        /* Pricing Section */
-        .pricing {
-            background: white;
-            padding: 60px 0;
-            box-shadow: var(--shadow);
-        }
-        .pricing h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-        }
-        .tiers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .tier {
-            background: #f8f9fa;
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-            position: relative;
-        }
-        .tier.featured {
-            background: linear-gradient(135deg, var(--primary-color), #ff69b4);
-            color: white;
-            transform: scale(1.05);
-        }
-        .tier h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        .price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-        .tier.featured .price {
-            color: #fff;
-        }
-        .features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-        .features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .tier.featured .features li {
-            border-color: rgba(255,255,255,0.2);
-        }
-        .testimonial {
-            background: #f0f0f0;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 40px 0;
-            font-style: italic;
-            text-align: center;
-        }
+section {
+  padding: 80px 20px;
+}
 
-        /* Risk Reversal */
-        .risk {
-            background: var(--primary-color);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        .risk h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+h1, h2, h3 {
+  font-weight: 800;
+  line-height: 1.2;
+}
 
-        /* Mobile optimizations: Stack, large taps, bottom-heavy [web:2][web:5] */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
-            }
-            .hero {
-                padding: 60px 0;
-            }
-            .cta-button {
-                width: 90%;
-                max-width: 400px;
-                margin: 0 auto 40px;
-            }
-            .logos {
-                gap: 20px;
-            }
-            .logo {
-                height: 30px;
-            }
-            .tiers {
-                grid-template-columns: 1fr;
-            }
-            .tier.featured {
-                transform: none;
-                order: -1; /* Decoy effect: Elite first on mobile */
-            }
-        }
+p {
+  color: var(--light);
+  margin-top: 15px;
+}
 
-        /* Deployment notes */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            background: white;
-            margin-top: 40px;
-        }
-    </style>
+/* HERO */
+.hero {
+  background: white;
+  text-align: center;
+  border-radius: var(--radius);
+  padding: 80px 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+.hero p {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  margin-bottom: 40px;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  min-height: 56px;
+  transition: 0.3s ease;
+}
+
+.cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(209,0,160,0.3);
+}
+
+/* TRUST BAR */
+.trust {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.logos img {
+  height: 36px;
+  opacity: 0.6;
+}
+
+/* PAS */
+.pas {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+}
+
+.pas-grid {
+  display: grid;
+  gap: 40px;
+}
+
+.pas h2 {
+  color: var(--primary);
+}
+
+/* PRICING */
+.pricing h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.tiers {
+  display: grid;
+  gap: 30px;
+}
+
+.tier {
+  background: white;
+  padding: 40px 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.tier.featured {
+  background: linear-gradient(135deg, #d100a0, #ff4fc3);
+  color: white;
+  transform: scale(1.03);
+}
+
+.price {
+  font-size: 2.2rem;
+  margin: 20px 0;
+}
+
+.features {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.features li {
+  margin: 10px 0;
+}
+
+.tier.featured .features li {
+  opacity: 0.9;
+}
+
+/* TESTIMONIAL */
+.testimonial {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  font-style: italic;
+}
+
+/* RISK */
+.risk {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  border-radius: var(--radius);
+}
+
+.risk p {
+  color: white;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--light);
+}
+
+/* MOBILE OPTIMIZATION */
+@media (min-width: 768px) {
+
+  .pas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tiers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Never Miss Your "Holy Grail" Product Again.</h1>
-            <p>Get real-time restocking alerts and exclusive 24-hour priority access to your favorite shades before they hit the shelves.</p>
-            <a href="#pricing" class="cta-button">Join the StockSentinel™ Priority List</a>
-        </section>
 
-        <!-- Trust Bar -->
-        <section class="trust-bar">
-            <p>Trusted by 30 Million+ Beauty Insiders. Featured in Vogue, Allure, and Forbes.</p>
-            <div class="logos">
-                <img src="https://via.placeholder.com/120x40/FF69B4/fff?text=Rare+Beauty" alt="Rare Beauty" class="logo">
-                <img src="https://via.placeholder.com/120x40/4169E1/fff?text=Dyson" alt="Dyson" class="logo">
-                <img src="https://via.placeholder.com/120x40/228B22/fff?text=Drunk+Elephant" alt="Drunk Elephant" class="logo">
-            </div>
-        </section>
+<div class="container">
 
-        <!-- PAS Section -->
-        <section class="pas">
-            <div>
-                <div>
-                    <h2>Problem</h2>
-                    <p>Staring at "Out of Stock" labels on the one moisturizer your sensitive skin depends on.</p>
-                </div>
-                <div>
-                    <h2>Agitation</h2>
-                    <p>Driving to three different stores only to find empty shelves and zero visibility on when your shade will return.</p>
-                </div>
-                <div>
-                    <h2>Solution</h2>
-                    <p>Sephora StockSentinel™. Our predictive AI tracks your usage and reserves your unit at your local store 24 hours before public restocking.</p>
-                </div>
-            </div>
-        </section>
+<!-- HERO -->
+<section class="hero">
+  <h1>Never Miss Your “Holy Grail” Product Again.</h1>
+  <p>Get real-time restocking alerts and exclusive <strong>24-hour priority access</strong> before your favorite shades hit the shelves.</p>
+  <a href="#pricing" class="cta">Join the StockSentinel™ Priority List</a>
+</section>
 
-        <!-- Social Proof + Pricing -->
-        <section class="pricing" id="pricing">
-            <h2>Choose Your Sentinel Plan</h2>
-            <div class="testimonial">
-                "I used to panic when my foundation ran low. Now, Sephora reserves my shade before I even know I’m out!" – Pamela, VIB Rouge.
-            </div>
-            <div class="tiers">
-                <div class="tier">
-                    <h3>Basic</h3>
-                    <div class="price">$0<span>/mo</span></div>
-                    <ul class="features">
-                        <li>Standard restock email alerts</li>
-                    </ul>
-                    <a href="#" class="cta-button">Get Started Free</a>
-                </div>
-                <div class="tier featured">
-                    <h3>Priority Sentinel</h3>
-                    <div class="price">$9.99<span>/mo</span></div>
-                    <ul class="features">
-                        <li>24-hour early access to restocks</li>
-                        <li>Guaranteed In-Store Reservation</li>
-                    </ul>
-                    <a href="#" class="cta-button">Join Priority</a>
-                </div>
-                <div class="tier">
-                    <h3>Elite Sentinel Bundle</h3>
-                    <div class="price">$14.99<span>/mo</span></div>
-                    <ul class="features">
-                        <li>All Priority benefits</li>
-                        <li>Same-Day Delivery on reserved items</li>
-                        <li>Monthly "Restock Mystery Sample"</li>
-                    </ul>
-                    <a href="#" class="cta-button">Go Elite</a>
-                </div>
-            </div>
-        </section>
+<!-- TRUST -->
+<section class="trust">
+  <p><strong>Trusted by 30 Million+ Beauty Insiders.</strong> Featured in Vogue, Allure, and Forbes.</p>
+  <div class="logos">
+    <img src="https://via.placeholder.com/120x40?text=Rare+Beauty">
+    <img src="https://via.placeholder.com/120x40?text=Dyson">
+    <img src="https://via.placeholder.com/120x40?text=Drunk+Elephant">
+  </div>
+</section>
 
-        <!-- Risk Reversal -->
-        <section class="risk">
-            <h2>Cancel anytime with one click. The Restock Guarantee: If we can’t secure your 'Holy Grail' shade within 30 days, your next month is on us.</h2>
-            <a href="#pricing" class="cta-button" style="margin-top: 30px; background: white; color: var(--primary-color);">Join Risk-Free</a>
-        </section>
+<!-- PAS -->
+<section class="pas">
+  <div class="pas-grid">
+
+    <div>
+      <h2>Problem</h2>
+      <p>Staring at “Out of Stock” labels on the one moisturizer your sensitive skin depends on.</p>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Sephora StockSentinel™. Deployed via GitHub + Vercel. Fully mobile-responsive with thumb-friendly design.</p>
-    </footer>
+    <div>
+      <h2>Agitation</h2>
+      <p>Driving to three different stores only to find empty shelves and zero visibility on when your shade will return.</p>
+    </div>
+
+    <div>
+      <h2>Solution</h2>
+      <p><strong>StockSentinel™</strong> uses predictive AI to track your usage and reserve your unit 24 hours before public restocking.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+
+  <h2>Choose Your Sentinel Plan</h2>
+
+  <div class="testimonial">
+    “I used to panic when my foundation ran low. Now my shade is reserved before I even know I’m out!” – <strong>Pamela, VIB Rouge</strong>
+  </div>
+
+  <div class="tiers">
+
+    <div class="tier">
+      <h3>Basic</h3>
+      <div class="price">$0/mo</div>
+      <ul class="features">
+        <li>Standard restock email alerts</li>
+      </ul>
+      <a href="#" class="cta">Get Started Free</a>
+    </div>
+
+    <div class="tier featured">
+      <h3>Priority Sentinel</h3>
+      <div class="price">$9.99/mo</div>
+      <ul class="features">
+        <li>24-hour early access</li>
+        <li>Guaranteed In-Store Reservation</li>
+      </ul>
+      <a href="#" class="cta" style="background:white;color:#d100a0;">Join Priority</a>
+    </div>
+
+    <div class="tier">
+      <h3>Elite Bundle</h3>
+      <div class="price">$14.99/mo</div>
+      <ul class="features">
+        <li>All Priority benefits</li>
+        <li>Same-Day Delivery</li>
+        <li>Monthly Mystery Sample</li>
+      </ul>
+      <a href="#" class="cta">Go Elite</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- RISK -->
+<section class="risk">
+  <h2>The Restock Guarantee</h2>
+  <p>If we can’t secure your “Holy Grail” shade within 30 days, your next month is on us. Cancel anytime with one click.</p>
+  <br>
+  <a href="#pricing" class="cta" style="background:white;color:#d100a0;">Join Risk-Free</a>
+</section>
+
+<footer>
+  © 2026 StockSentinel™. Mobile-first. Deployed via GitHub + Vercel.
+</footer>
+
+</div>
 </body>
 </html>
